@@ -6,9 +6,9 @@ import "./index.css";
 import * as React from "react";
 import { hydrate } from "react-dom";
 
-import ConfigContext from "../components/ConfigContext";
 import { Config } from "../server/config";
-import App from "../App";
+import App from "../../App";
+import ConfigContext from "src/state/ConfigContext";
 
 const config = (window as any).__CONFIG__ as Config;
 delete (window as any).__CONFIG__;

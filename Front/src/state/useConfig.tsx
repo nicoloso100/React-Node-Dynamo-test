@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { Config } from "../server/config";
+import { Config } from "../config/server/config";
 import ConfigContext from "./ConfigContext";
 
 export default function useConfig(): Config {

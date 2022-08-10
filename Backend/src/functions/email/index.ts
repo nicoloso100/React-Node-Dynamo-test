@@ -8,6 +8,7 @@ export const createEmail = {
       http: {
         method: "post",
         path: "email/create-email/",
+        cors: true,
         request: {
           schemas: {
             "application/json": createEmailSchema,

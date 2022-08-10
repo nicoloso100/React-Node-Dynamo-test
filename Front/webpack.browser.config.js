@@ -11,7 +11,7 @@ const isOffline = !!process.env.IS_OFFLINE;
 
 module.exports = {
   entry: {
-    main: path.join(__dirname, "src/browser/index.tsx"),
+    main: path.join(__dirname, "src/config/browser/index.tsx"),
   },
   target: "web",
   mode: isOffline ? "development" : "production",

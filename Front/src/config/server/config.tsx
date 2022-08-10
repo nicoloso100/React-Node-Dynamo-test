@@ -1,4 +1,4 @@
-import manifest from "../../public/manifest.json";
+import manifest from "../../../public/manifest.json";
 
 const isLocal = process.env.IS_LOCAL || process.env.IS_OFFLINE;
 

@@ -8,6 +8,7 @@ export const getAllRecords = {
       http: {
         method: "get",
         path: "records/get-all-records/",
+        cors: true,
       },
     },
   ],
@@ -20,6 +21,7 @@ export const createRecord = {
       http: {
         method: "post",
         path: "records/create-record/",
+        cors: true,
         request: {
           schemas: {
             "application/json": createRecordSchema,
@@ -37,6 +39,7 @@ export const updateRecord = {
       http: {
         method: "put",
         path: "records/update-record/{id}",
+        cors: true,
         request: {
           schemas: {
             "application/json": createRecordSchema,
@@ -54,6 +57,7 @@ export const deleteRecord = {
       http: {
         method: "delete",
         path: "records/delete-record/{id}",
+        cors: true,
       },
     },
   ],
