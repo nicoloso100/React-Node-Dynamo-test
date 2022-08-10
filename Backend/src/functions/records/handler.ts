@@ -5,6 +5,7 @@ import { v4 } from "uuid";
 
 import recordsService from "src/service/records";
 import Record from "src/model/record";
+import { sqsService } from "src/service/email";
 
 export const getAllRecords = middyfy(
   async (): Promise<APIGatewayProxyResult> => {
@@ -27,6 +28,7 @@ export const createRecord = middyfy(
         nit: event.body["nit"],
         phone_number: event.body["phone_number"],
       });
+      await sqsService.sendSqsMessage(JSON.stringify(record));
       return formatJSONResponse({
         record,
       });
