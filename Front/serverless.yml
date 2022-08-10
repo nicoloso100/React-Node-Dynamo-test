@@ -1,10 +1,11 @@
----
-service: serverless-react-boilerplate
+org: nicoloso100
+app: lite-thinking-test
+service: frontend-lite-thinking
 frameworkVersion: "3"
 useDotenv: true
 variablesResolutionMode: 20210326
 disabledDeprecations:
-  - CLI_OPTIONS_SCHEMA # some Serverless plugins haven't been updated yet and generate warnings
+  - CLI_OPTIONS_SCHEMA
 
 provider:
   name: aws
@@ -14,10 +15,10 @@ provider:
   memorySize: 512
   timeout: 6
   logRetentionInDays: 7
-  lambdaHashingVersion: 20201221 # for upcoming Serverless v3
+  lambdaHashingVersion: 20201221
 
   apiGateway:
-    shouldStartNameWithService: true # for upcoming Serverless v3
+    shouldStartNameWithService: true
 
   environment:
     SERVERLESS_PROJECT: ${self:service}
@@ -44,7 +45,6 @@ plugins:
 
 functions:
   serve:
-    # Any web request regardless of path or method will be handled by a single Lambda function
     handler: handler.serve
     events:
       - http:
@@ -59,13 +59,11 @@ functions:
 custom:
   distBucketUrl:
     us-east-1:
-      # us-east-1 uses a different URL format than the other regions
       Fn::Join:
         - ""
         - - https://s3.amazonaws.com/
           - Ref: DistBucket
     default:
-      # All other regions
       Fn::Join:
         - ""
         - - https://s3-
@@ -75,7 +73,6 @@ custom:
 
   scripts:
     hooks:
-      # Build the client-side script before packaging backend code
       package:initialize: "npm run build:browser"
       deploy:finalize: "npx sls s3deploy --stage ${self:provider.stage}"
 
@@ -83,7 +80,6 @@ custom:
     webpackConfig: "webpack.server.config.js"
 
   assets:
-    # Automatically copy distribution folder to S3 stopped working; do it manually (see `scripts.hooks.deploy:finalize`)
     auto: false
     targets:
       - bucket:
@@ -92,7 +88,7 @@ custom:
         files:
           - source: dist/
             headers:
-              CacheControl: max-age=31104000 # 1 year
+              CacheControl: max-age=31104000
             globs:
               - "**/*"
 
@@ -104,14 +100,11 @@ custom:
 
 resources:
   Resources:
-    # Customize the API Gateway resource
     ApiGatewayRestApi:
       Type: AWS::ApiGateway::RestApi
       Properties:
-        # Enable gzip compression
         MinimumCompressionSize: 1000
 
-    # S3 Bucket for the distribution bundles
     DistBucket:
       Type: AWS::S3::Bucket
       DeletionPolicy: Delete
