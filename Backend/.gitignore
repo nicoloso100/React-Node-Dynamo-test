@@ -10,3 +10,6 @@ jspm_packages
 
 # local dynamo directories
 .dynamodb
+
+# vscode directories
+.vscode
