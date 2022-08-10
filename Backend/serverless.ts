@@ -1,4 +1,10 @@
-import { createRecord, getAllRecords } from "@functions/index";
+import { createEmail } from "@functions/email";
+import {
+  createRecord,
+  getAllRecords,
+  updateRecord,
+  deleteRecord,
+} from "@functions/records";
 import type { AWS } from "@serverless/typescript";
 
 const serverlessConfiguration: AWS = {
@@ -42,8 +48,13 @@ const serverlessConfiguration: AWS = {
       },
     },
   },
-  // import the function via paths
-  functions: { createRecord, getAllRecords },
+  functions: {
+    createRecord,
+    getAllRecords,
+    updateRecord,
+    deleteRecord,
+    createEmail,
+  },
   package: { individually: true },
   custom: {
     esbuild: {
