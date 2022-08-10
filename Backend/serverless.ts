@@ -1,4 +1,4 @@
-import { getTest } from "@functions/business/index";
+import { createRecord, getAllRecords } from "@functions/index";
 import type { AWS } from "@serverless/typescript";
 
 const serverlessConfiguration: AWS = {
@@ -36,14 +36,14 @@ const serverlessConfiguration: AWS = {
               "dynamodb:UpdateItem",
               "dynamodb:DeleteItem",
             ],
-            Resource: "arn:aws:dynamodb:us-west-2:*:table/RecordsTable",
+            Resource: "arn:aws:dynamodb:us-east-1:*:table/RecordsTable",
           },
         ],
       },
     },
   },
   // import the function via paths
-  functions: { getTest },
+  functions: { createRecord, getAllRecords },
   package: { individually: true },
   custom: {
     esbuild: {
