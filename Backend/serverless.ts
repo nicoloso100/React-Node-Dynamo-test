@@ -44,6 +44,28 @@ const serverlessConfiguration: AWS = {
             ],
             Resource: "arn:aws:dynamodb:us-east-1:*:table/RecordsTable",
           },
+          {
+            Effect: "Allow",
+            Action: [
+              "sqs:SendMessage",
+              "sqs:ReceiveMessage",
+              "sqs:DeleteMessage",
+              "sqs:GetQueueAttributes",
+            ],
+            Resource: "arn:aws:sqs:us-east-1:895386959211:lite-thinking-email",
+          },
+          {
+            Effect: "Allow",
+            Action: ["ses:SendEmail"],
+            Resource:
+              "arn:aws:ses:us-east-1:895386959211:identity/nicolas.angaritao@unilibrebog.edu.co",
+          },
+          {
+            Effect: "Allow",
+            Action: ["ses:SendEmail"],
+            Resource:
+              "arn:aws:ses:us-east-1:895386959211:identity/nico.las0315@hotmail.com",
+          },
         ],
       },
     },
